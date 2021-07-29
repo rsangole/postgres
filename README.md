@@ -1,4 +1,6 @@
-# How to setup a Postgres from scratch
+# README
+
+## How to setup a local dockerized Postgres database from scratch
 
 1. Pull postgres docker image using `docker pull postgres:13.3`
 1. Edit `00-postgres-init.sh` with your custom settings
