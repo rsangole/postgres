@@ -9,3 +9,5 @@
 1. To run RStudio and Postgres together, run `docker-compose up -d`
 1. Connect to RStudio in a browser using `localhost:8787`
 1. Test your database by running `postgres.R`
+
+As a short cut to run docker & open a browser for RStudio, run `docker-compose up -d; firefox localhost:8787`
