@@ -1,0 +1,28 @@
+version: "3.3"
+services:
+  db:
+    image: postgres:13.3
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "anomaly"
+      POSTGRES_USER: "rahul"
+      POSTGRES_PASSWORD: "pass"
+    ports:
+      - "5432:5432"
+    volumes:
+      - type: "bind"
+        source: "$HOME/docker/volumes/postgres"
+        target: "/var/lib/postgresql/data"
+  rstudio:
+    image: hatmatrix/blog:base
+    ports:
+      - "8787:8787"
+      - "3838:3838"
+    environment:
+      DISABLE_AUTH: "true"
+    volumes:
+      - type: "bind"
+        source: "$HOME/github"
+        target: "/home/rstudio"
+    depends_on:
+      - "db"
