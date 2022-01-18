@@ -19,6 +19,14 @@ docker run --rm --name post_setup \
   -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data \
   postgres:13.3
 
+# wait for the postgres service to be ready
+if ! command -v timeout &> /dev/null
+then
+    echo "`timeout` could not be found. On Mac, run `brew install coreutils`"
+    exit
+fi
+timeout 20s bash -c "until docker exec post_setup pg_isready; do sleep 1; done"
+
 # create a new role, and two databases
 echo "CREATE ROLE rahul WITH PASSWORD 'pass' CREATEDB LOGIN;
 CREATE DATABASE work; CREATE DATABASE anomaly;" | \
